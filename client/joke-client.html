@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <title>Joke Client</title>
+    <link href="default-styles.css" type="text/css" rel="stylesheet" />
+    <style>
+        header {
+            background-color: pink;
+            color: yellow;
+            font-size: 2em;
+            padding: 1em;
+        }
+
+        h1 {
+            font-family: fantasy;
+            filter: drop-shadow(5px 5px 2px #4444dd);
+        }
+
+        section {
+            border-bottom: 1px dashed gray;
+        }
+    </style>
+    <script>
+        const handleResponse = (e) => {
+            console.log("e.target =", e.target); //here. e.target is the xhr object
+            console.log("e.target.response = ", e.target.response); //so that means this is a string of joke JSON
+            const obj = JSON.parse(e.target.response); //turn it back into an object
+            console.log("obj=", obj);
+
+            if (obj.length == null) {
+                //now go ahead and update #jokeContainer with the contents of the joke
+                let jokeContainer = document.querySelector("#jokeContainer");
+                jokeContainer.innerHTML = `<b>${obj.q}</b><br><br>${obj.a}`;
+            } else {
+                let jokesContainer = document.querySelector("#jokesContainer");
+                jokesContainer.innerHTML ="";
+                for (let i = 0; i < obj.length; i++) {
+                    jokesContainer.innerHTML += `<b>${obj[i].q}</b><br>${obj[i].a}<br><br>`;
+                }
+            }
+        }
+
+        const downloadJoke = (e) => {
+            // remember that an `Event` object gets passed along every time that an event handler or listener calls a function
+            // the `target` property of that event points at the element that sent the event, in this case a button
+            console.log(`An element of id=${e.target.id} was clicked!`);
+
+            let jokeURL = "/random-joke";
+            if (e.target.id == "btnJoke") {
+                jokeURL = "/random-joke";
+            } else {
+                jokeURL = "/random-jokes?limit=5";
+            }
+
+            const xhr = new XMLHttpRequest();
+            xhr.onload = handleResponse;
+            xhr.open("GET", jokeURL);
+            //with XHR, after we open a connection, but before we send(), we can set 1 or more HTTP request headers
+            //this isn't strictly necessary  because "/random-joke" sends JSON by default
+            xhr.setRequestHeader('Accept', "application/javascript");
+            xhr.send();
+        }
+
+        const init = () => {
+            // An Event *Handler*
+            // document.querySelector("#btnJoke").onclick = downloadJoke; // same as below, less typing, use which ever version you prefer
+
+            // An Event *Listener*
+            document.querySelector("#btnJoke").addEventListener("click", downloadJoke);
+
+            document.querySelector("#btnJokes").addEventListener("click", downloadJoke);
+
+            // **Actually, event handlers and listeners are NOT exactly the same in all use cases - what ARE the differences?**
+        }
+
+        window.onload = init;
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Are you ready to LAUGH?</h1>
+    </header>
+
+    <section>
+        <h2>Just have time for one joke?</h2>
+        <p><button id="btnJoke">Show me a Joke!</button></p>
+        <div id="jokeContainer">
+
+        </div>
+    </section>
+
+    <section>
+        <h2>How about 5 jokes?</h2>
+        <p><button id="btnJokes">Show me 5 Jokes!</button></p>
+        <div id="jokesContainer">
+    </section>
+
+</body>
+
+</html>

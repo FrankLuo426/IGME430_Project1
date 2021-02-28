@@ -1,0 +1,29 @@
+{
+  "name": "to-do-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Tests complete\"",
+    "start": "node ./src/index.js",
+    "nodemon": "nodemon ./src/index.js -e js,html,css",
+    "pretest": "eslint ./src --fix"
+  },
+  "keywords": [],
+  "author": "Frank Luo",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrankLuo426/IGME430_Project1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FrankLuo426/IGME430_Project1/issues"
+  },
+  "homepage": "https://github.com/FrankLuo426/IGME430_Project1#readme"
+}
