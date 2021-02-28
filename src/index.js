@@ -11,8 +11,8 @@ const urlStruct = {
   '/default-styles.css': jsonHandler.getCSSResponse,
   '/random-joke': jsonHandler.getRandomNPCResponse,
   '/random-jokes': jsonHandler.getRandomNPCResponse,
-  '/joke-client': htmlHandler.get,
-  notFound: htmlHandler.getJokeClientResponse,
+  '/npc-client': htmlHandler.get,
+  notFound: htmlHandler.getnpcClientResponse,
 };
 
 // 3 - locally this will be 3000, on Heroku it will be assigned

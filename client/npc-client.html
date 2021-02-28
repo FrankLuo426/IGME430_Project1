@@ -1,11 +1,11 @@
 <html>
 
 <head>
-    <title>Joke Client</title>
+    <title>NPC Client</title>
     <link href="default-styles.css" type="text/css" rel="stylesheet" />
     <style>
         header {
-            background-color: pink;
+            background-color: black;
             color: yellow;
             font-size: 2em;
             padding: 1em;
@@ -28,33 +28,53 @@
             console.log("obj=", obj);
 
             if (obj.length == null) {
-                //now go ahead and update #jokeContainer with the contents of the joke
-                let jokeContainer = document.querySelector("#jokeContainer");
-                jokeContainer.innerHTML = `<b>${obj.q}</b><br><br>${obj.a}`;
+                //now go ahead and update #npcContainer with the contents of the joke
+                let npcContainer = document.querySelector("#npcContainer");
+                npcContainer.innerHTML = `
+                <b>${obj.Name}</b>
+                <br><br>Sex: ${obj.Sex}
+                <br><br>Career: ${obj.Career}
+                <br><br>Race: ${obj.Race}
+                <br><br>Personality: ${obj.Personality}
+                <br><br>Blood: ${obj.Blood}
+                <br><br>Mana: ${obj.Mana}
+                <br><br>Strength: ${obj.Strength}
+                <br><br>Spellpower${obj.Spellpower}
+                <br><br>Speed: ${obj.Speed}`;
             } else {
                 let jokesContainer = document.querySelector("#jokesContainer");
-                jokesContainer.innerHTML ="";
+                jokesContainer.innerHTML = "";
                 for (let i = 0; i < obj.length; i++) {
-                    jokesContainer.innerHTML += `<b>${obj[i].q}</b><br>${obj[i].a}<br><br>`;
+                    jokesContainer.innerHTML += `
+                    <b>${obj[i].Name}</b>
+                    <br><br>Sex: ${obj[i].Sex}
+                <br><br>Career: ${obj[i].Career}
+                <br><br>Race: ${obj[i].Race}
+                <br><br>Personality: ${obj[i].Personality}
+                <br><br>Blood: ${obj[i].Blood}
+                <br><br>Mana: ${obj[i].Mana}
+                <br><br>Strength: ${obj[i].Strength}
+                <br><br>Spellpower${obj[i].Spellpower}
+                <br><br>Speed: ${obj[i].Speed}<br><br>------------------<br><br>`;
                 }
             }
         }
 
-        const downloadJoke = (e) => {
+        const downloadNPC = (e) => {
             // remember that an `Event` object gets passed along every time that an event handler or listener calls a function
             // the `target` property of that event points at the element that sent the event, in this case a button
             console.log(`An element of id=${e.target.id} was clicked!`);
 
-            let jokeURL = "/random-joke";
-            if (e.target.id == "btnJoke") {
-                jokeURL = "/random-joke";
+            let npcURL = "/";
+            if (e.target.id == "nbtnNPC") {
+                npcURL = "/";
             } else {
-                jokeURL = "/random-jokes?limit=5";
+                npcURL = "/?limit=10";
             }
 
             const xhr = new XMLHttpRequest();
             xhr.onload = handleResponse;
-            xhr.open("GET", jokeURL);
+            xhr.open("GET", npcURL);
             //with XHR, after we open a connection, but before we send(), we can set 1 or more HTTP request headers
             //this isn't strictly necessary  because "/random-joke" sends JSON by default
             xhr.setRequestHeader('Accept', "application/javascript");
@@ -63,12 +83,12 @@
 
         const init = () => {
             // An Event *Handler*
-            // document.querySelector("#btnJoke").onclick = downloadJoke; // same as below, less typing, use which ever version you prefer
+            // document.querySelector("#nbtnNPC").onclick = downloadNPC; // same as below, less typing, use which ever version you prefer
 
             // An Event *Listener*
-            document.querySelector("#btnJoke").addEventListener("click", downloadJoke);
+            document.querySelector("#nbtnNPC").addEventListener("click", downloadNPC);
 
-            document.querySelector("#btnJokes").addEventListener("click", downloadJoke);
+            document.querySelector("#nbtnNPCs").addEventListener("click", downloadNPC);
 
             // **Actually, event handlers and listeners are NOT exactly the same in all use cases - what ARE the differences?**
         }
@@ -79,20 +99,20 @@
 
 <body>
     <header>
-        <h1>Are you ready to LAUGH?</h1>
+        <h1>Do you want a random NPC?</h1>
     </header>
 
     <section>
-        <h2>Just have time for one joke?</h2>
-        <p><button id="btnJoke">Show me a Joke!</button></p>
-        <div id="jokeContainer">
+        <h2>Just need one</h2>
+        <p><button id="nbtnNPC">Give me an NPC</button></p>
+        <div id="npcContainer">
 
         </div>
     </section>
 
     <section>
-        <h2>How about 5 jokes?</h2>
-        <p><button id="btnJokes">Show me 5 Jokes!</button></p>
+        <h2>How about 10 NPCs?</h2>
+        <p><button id="nbtnNPCs">Show me 10!</button></p>
         <div id="jokesContainer">
     </section>
 
