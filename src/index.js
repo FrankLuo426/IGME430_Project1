@@ -7,10 +7,10 @@ const htmlHandler = require('./htmlResponses.js');
 const jsonHandler = require('./responses.js');
 
 const urlStruct = {
-  '/': jsonHandler.getRandomJokeResponse,
+  '/': jsonHandler.getRandomNPCResponse,
   '/default-styles.css': jsonHandler.getCSSResponse,
-  '/random-joke': jsonHandler.getRandomJokeResponse,
-  '/random-jokes': jsonHandler.getRandomJokeResponse,
+  '/random-joke': jsonHandler.getRandomNPCResponse,
+  '/random-jokes': jsonHandler.getRandomNPCResponse,
   '/joke-client': htmlHandler.get,
   notFound: htmlHandler.getJokeClientResponse,
 };
