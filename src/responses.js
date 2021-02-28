@@ -11,25 +11,25 @@ const npcRace = ["Draenei", " Dwarf", "Gnome", "Human", "Night Elf", "Worgen", "
 ];
 const npcPersonality = ["INTJ", "INTP", "ENTJ", "ENTP", "INFJ", "INFP", "ENFJ", "ENFP", "ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP"];
 
-const randomNPC = () =>{
+const randomNPC = () => {
   let npc = new Object();
-    npc.Name = npcName[Math.floor(Math.random() * npcName.length)];
-    npc.Sex = npcSex[Math.floor(Math.random() * npcSex.length)];
-    npc.Career = npcCareer[Math.floor(Math.random() * npcCareer.length)];
-    npc.Race = npcRace[Math.floor(Math.random() * npcRace.length)];
-    npc.Personality = npcPersonality[Math.floor(Math.random() * npcPersonality.length)];
-    npc.Blood = Math.floor(Math.random() * 100);
-    npc.Mana = Math.floor(Math.random() * 50);
-    npc.Strength = Math.floor(Math.random() * 100);
-    npc.Spellpower = Math.floor(Math.random() * 200);
-    npc.Speed = Math.floor(Math.random() * 10);
-    return npc;
+  npc.Name = npcName[Math.floor(Math.random() * npcName.length)];
+  npc.Sex = npcSex[Math.floor(Math.random() * npcSex.length)];
+  npc.Career = npcCareer[Math.floor(Math.random() * npcCareer.length)];
+  npc.Race = npcRace[Math.floor(Math.random() * npcRace.length)];
+  npc.Personality = npcPersonality[Math.floor(Math.random() * npcPersonality.length)];
+  npc.Blood = Math.floor(Math.random() * 100);
+  npc.Mana = Math.floor(Math.random() * 50);
+  npc.Strength = Math.floor(Math.random() * 100);
+  npc.Spellpower = Math.floor(Math.random() * 200);
+  npc.Speed = Math.floor(Math.random() * 10);
+  return npc;
 }
 
 const randomNpcJSON = (limit = 1) => {
   const randomNPCList = [];
-  limit2 = Number(limit);
-  for (let i = 0; i < limit2; i++) {
+  const limit2 = Number(limit);
+  for (let i = 0; i < limit2; i += 1) {
     randomNPCList[i] = randomNPC();
   }
   return JSON.stringify(randomNPCList);
@@ -54,7 +54,7 @@ const getRandomNPCXML = (limit = 1) => {
   let xmlList = `
   <NPCList>
   `;
-limit2 = Number(limit);
+  const limit2 = Number(limit);
   for (let i = 0; i < limit2; i += 1) {
     const NPC = randomNPC();
     xmlNPC = `
