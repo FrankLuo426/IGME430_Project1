@@ -12,7 +12,7 @@ const npcRace = ["Draenei", " Dwarf", "Gnome", "Human", "Night Elf", "Worgen", "
 const npcPersonality = ["INTJ", "INTP", "ENTJ", "ENTP", "INFJ", "INFP", "ENFJ", "ENFP", "ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP"];
 
 const randomNPC = () => {
-  let npc = new Object();
+  let npc = {};
   npc.Name = npcName[Math.floor(Math.random() * npcName.length)];
   npc.Sex = npcSex[Math.floor(Math.random() * npcSex.length)];
   npc.Career = npcCareer[Math.floor(Math.random() * npcCareer.length)];
@@ -34,20 +34,6 @@ const randomNpcJSON = (limit = 1) => {
   }
   return JSON.stringify(randomNPCList);
 }
-
-const getRandomJokeJSON = (limit = 1) => {
-  const limit2 = Number(limit);
-  if (limit2 === 1) {
-    const responseObj = qList[Math.floor(Math.random() * 10)];
-    return JSON.stringify(responseObj);
-  }
-  const responseObjList = [];
-  for (let i = 0; i < limit2; i += 1) {
-    const responseObj = qList[Math.floor(Math.random() * 10)];
-    responseObjList[i] = responseObj;
-  }
-  return JSON.stringify(responseObjList);
-};
 
 const getRandomNPCXML = (limit = 1) => {
   let xmlNPC;
