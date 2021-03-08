@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPC List</title>
+    <script>
+        const handleResponse = (e) => {
+            console.log("handleResponse");
+            const obj = JSON.parse(e.target.response);
+            console.log(obj.NPC[0].name);
+            let npcsContainer = document.querySelector("#npcsContainer");
+            npcsContainer.innerHTML = "";
+            if (obj.NPC.length == null) {
+                //now go ahead and update #npcContainer with the contents of the joke
+                let npcContainer = document.querySelector("#npcContainer");
+                npcContainer.innerHTML = `
+                <b>${obj.NPC[0].name}</b>
+                <br><br>Sex: ${obj.NPC[0].sex}
+                <br><br>Career: ${obj.NPC[0].career}
+                <br><br>Race: ${obj.NPC[0].race}
+                <br><br>Personality: ${obj.NPC[0].personality}
+                <br><br>Blood: ${obj.NPC[0].blood}
+                <br><br>Mana: ${obj.NPC[0].mana}
+                <br><br>Strength: ${obj.NPC[0].strength}
+                <br><br>Spellpower${obj.NPC[0].spellpower}
+                <br><br>Speed: ${obj.NPC[0].speed}`;
+            } else {
+                let npcsContainer = document.querySelector("#npcsContainer");
+                npcsContainer.innerHTML = "";
+                for (let i = 0; i < obj.NPC.length; i++) {
+                    npcsContainer.innerHTML += `
+                    <b>${obj.NPC[i].name}</b>
+                    <br><br>Sex: ${obj.NPC[i].sex}
+                <br><br>Career: ${obj.NPC[i].career}
+                <br><br>Race: ${obj.NPC[i].race}
+                <br><br>Personality: ${obj.NPC[i].personality}
+                <br><br>Blood: ${obj.NPC[i].blood}
+                <br><br>Mana: ${obj.NPC[i].mana}
+                <br><br>Strength: ${obj.NPC[i].strength}
+                <br><br>Spellpower${obj.NPC[i].spellpower}
+                <br><br>Speed: ${obj.NPC[i].speed}<br><br>
+                <br><br>------------------<br><br>`;
+                }
+            }
+
+        }
+
+        const downloadNPC = (e) => {
+            console.log("downloadNPC");
+            let npcURL = "/user-npc-list";
+
+            const xhr = new XMLHttpRequest();
+            xhr.onload = handleResponse;
+            xhr.open("GET", npcURL);
+            //with XHR, after we open a connection, but before we send(), we can set 1 or more HTTP request headers
+            //this isn't strictly necessary  because "/random-joke" sends JSON by default
+            xhr.setRequestHeader('Accept', "application/javascript");
+            xhr.send();
+        }
+        const init = () => {
+            // An Event *Handler*
+            // document.querySelector("#nbtnNPC").onclick = downloadNPC; // same as below, less typing, use which ever version you prefer
+
+            // An Event *Listener*
+
+            document.querySelector("#nbtnNPCs").addEventListener("click", downloadNPC);
+
+
+            // **Actually, event handlers and listeners are NOT exactly the same in all use cases - what ARE the differences?**
+        }
+
+        window.onload = init;
+    </script>
+</head>
+
+<body>
+    <a href="/npc-client">Client</a>
+    <section>
+        <p><button id="nbtnNPCs">Show me 10!</button></p>
+        <div id="npcContainer"></div>
+        <div id="npcsContainer"></div>
+    </section>
+</body>
+
+</html>

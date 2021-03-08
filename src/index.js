@@ -9,14 +9,37 @@ const jsonHandler = require('./responses.js');
 const urlStruct = {
   '/': jsonHandler.getRandomNPCResponse,
   '/default-styles.css': jsonHandler.getCSSResponse,
-  '/random-joke': jsonHandler.getRandomNPCResponse,
-  '/random-jokes': jsonHandler.getRandomNPCResponse,
-  '/npc-client': htmlHandler.get,
-  notFound: htmlHandler.getnpcClientResponse,
+  '/user-npc-list': jsonHandler.getUserNPCList,
+  '/npc-client': htmlHandler.getnpcClientResponse,
+  '/npc-list': htmlHandler.getNPCListResponse,
+  notFound: htmlHandler.getNPCListResponse,
 };
 
 // 3 - locally this will be 3000, on Heroku it will be assigned
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
+
+const handlePost = (request, response, parsedUrl) => {
+  if (parsedUrl.pathname === '/custom-npc') {
+    const body = [];
+
+    // https://nodejs.org/api/http.html
+    request.on('error', (err) => {
+      console.dir(err);
+      response.statusCode = 400;
+      response.end();
+    });
+
+    request.on('data', (chunk) => {
+      body.push(chunk);
+    });
+
+    request.on('end', () => {
+      const bodyString = Buffer.concat(body).toString(); // name=tony&age=35
+      const bodyParams = query.parse(bodyString); // turn into an object with .name & .age
+      jsonHandler.customNPC(request, response, bodyParams);
+    });
+  }
+};
 
 const onRequest = (request, response) => {
   let acceptedTypes = request.headers.accept && request.headers.accept.split(',');
@@ -26,6 +49,12 @@ const onRequest = (request, response) => {
   const {
     pathname,
   } = parsedUrl;
+
+  if (request.method === 'POST') {
+    // handle POST
+    handlePost(request, response, parsedUrl);
+    return; // bail out of function
+  }
 
   const params = query.parse(parsedUrl.query);
   const httpMethod = request.method;
