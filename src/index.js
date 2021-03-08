@@ -7,7 +7,7 @@ const htmlHandler = require('./htmlResponses.js');
 const jsonHandler = require('./responses.js');
 
 const urlStruct = {
-  '/': jsonHandler.getRandomNPCResponse,
+  '/': htmlHandler.getnpcClientResponse,
   '/default-styles.css': jsonHandler.getCSSResponse,
   '/user-npc-list': jsonHandler.getUserNPCList,
   '/npc-client': htmlHandler.getnpcClientResponse,
