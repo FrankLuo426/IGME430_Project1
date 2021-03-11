@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NPC List</title>
+    <link href="/list-style" type="text/css" rel="stylesheet" />
+
     <script>
         const handleResponse = (e) => {
             console.log("handleResponse");
@@ -17,6 +19,7 @@
                 //now go ahead and update #npcContainer with the contents of the joke
                 let npcContainer = document.querySelector("#npcContainer");
                 npcContainer.innerHTML = `
+                <div class="npcDiv">
                 <b>${obj.NPC[0].name}</b>
                 <br><br>Sex: ${obj.NPC[0].sex}
                 <br><br>Career: ${obj.NPC[0].career}
@@ -26,12 +29,13 @@
                 <br><br>Mana: ${obj.NPC[0].mana}
                 <br><br>Strength: ${obj.NPC[0].strength}
                 <br><br>Spellpower${obj.NPC[0].spellpower}
-                <br><br>Speed: ${obj.NPC[0].speed}`;
+                <br><br>Speed: ${obj.NPC[0].speed}</div>`;
             } else {
                 let npcsContainer = document.querySelector("#npcsContainer");
                 npcsContainer.innerHTML = "";
                 for (let i = 0; i < obj.NPC.length; i++) {
                     npcsContainer.innerHTML += `
+                    <div class="npcDiv">
                     <b>${obj.NPC[i].name}</b>
                     <br><br>Sex: ${obj.NPC[i].sex}
                 <br><br>Career: ${obj.NPC[i].career}
@@ -41,8 +45,7 @@
                 <br><br>Mana: ${obj.NPC[i].mana}
                 <br><br>Strength: ${obj.NPC[i].strength}
                 <br><br>Spellpower${obj.NPC[i].spellpower}
-                <br><br>Speed: ${obj.NPC[i].speed}<br><br>
-                <br><br>------------------<br><br>`;
+                <br><br>Speed: ${obj.NPC[i].speed}<br><br><div>`;
                 }
             }
 
@@ -66,23 +69,25 @@
 
             // An Event *Listener*
 
-            document.querySelector("#nbtnNPCs").addEventListener("click", downloadNPC);
-
+            //document.querySelector("#nbtnNPCs").addEventListener("click", downloadNPC);
+            downloadNPC();
 
             // **Actually, event handlers and listeners are NOT exactly the same in all use cases - what ARE the differences?**
         }
 
         window.onload = init;
     </script>
+
+
 </head>
 
 <body>
-    <a href="/npc-client">Client</a>
     <section>
-        <p><button id="nbtnNPCs">Show me 10!</button></p>
+        <!-- <p><button id="nbtnNPCs">Show me 10!</button></p> -->
         <div id="npcContainer"></div>
         <div id="npcsContainer"></div>
     </section>
+    <a href="/npc-client"><button class="button">See the list</button></a>
 </body>
 
 </html>

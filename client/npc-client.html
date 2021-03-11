@@ -1,25 +1,9 @@
-<html>
+<!DOCTYPE html>
 
 <head>
     <title>NPC Client</title>
-    <link href="default-styles.css" type="text/css" rel="stylesheet" />
-    <style>
-        header {
-            background-color: black;
-            color: yellow;
-            font-size: 2em;
-            padding: 1em;
-        }
+    <link href="/client-style" type="text/css" rel="stylesheet" />
 
-        h1 {
-            font-family: fantasy;
-            filter: drop-shadow(5px 5px 2px #4444dd);
-        }
-
-        section {
-            border-bottom: 1px dashed gray;
-        }
-    </style>
     <script>
         let sendingNPC = {};
 
@@ -34,6 +18,7 @@
                 //now go ahead and update #npcContainer with the contents of the joke
                 let npcContainer = document.querySelector("#npcContainer");
                 npcContainer.innerHTML = `
+                <div class="npcDiv">
                 <b>${obj.Name}</b>
                 <br><br>Sex: ${obj.Sex}
                 <br><br>Career: ${obj.Career}
@@ -43,12 +28,15 @@
                 <br><br>Mana: ${obj.Mana}
                 <br><br>Strength: ${obj.Strength}
                 <br><br>Spellpower${obj.Spellpower}
-                <br><br>Speed: ${obj.Speed}`;
+                <br><br>Speed: ${obj.Speed}
+                <br><br><button class="button" id="add"}>Add to list</button>
+                </div>`;
             } else {
                 let npcsContainer = document.querySelector("#npcsContainer");
                 npcsContainer.innerHTML = "";
                 for (let i = 0; i < obj.length; i++) {
                     npcsContainer.innerHTML += `
+                    <div class="npcDiv">
                     <b>${obj[i].Name}</b>
                     <br><br>Sex: ${obj[i].Sex}
                 <br><br>Career: ${obj[i].Career}
@@ -58,8 +46,9 @@
                 <br><br>Mana: ${obj[i].Mana}
                 <br><br>Strength: ${obj[i].Strength}
                 <br><br>Spellpower${obj[i].Spellpower}
-                <br><br>Speed: ${obj[i].Speed}<br><br>
-                <br><br>------------------<br><br>`;
+                <br><br>Speed: ${obj[i].Speed}
+                <br><br><button class="button">Add to list</button>
+                </div>`;
                 }
             }
         }
@@ -112,6 +101,7 @@
         }
 
         const uploadSelectedNPC = (e) => {
+            console.log("uploadSelectedNPC");
             let customNPCURL = "/custom-npc";
             const xhr = new XMLHttpRequest();
             xhr.open("POST", customNPCURL);
@@ -119,10 +109,14 @@
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             console.log("UPLOAD SELECTED NPC");
             const data =
-                `name=${e.name}&sex=${e.sex}&career=${e.career}&race=${e.race}&personality=${e.personality}&blood=${e.blood}&mana=${e.mana}&strength=${e.strength}&spellpower=${e.spellpower}&speed=${e.speed}`;
+                `name=${obj.name}&sex=${obj.sex}&career=${obj.career}&race=${obj.race}&personality=${obj.personality}&blood=${obj.blood}&mana=${obj.mana}&strength=${obj.strength}&spellpower=${obj.spellpower}&speed=${obj.speed}`;
 
             xhr.onload = () => handleResponse(xhr);
             xhr.send(data);
+        }
+
+        function parseInData(obj) {
+            console.log(obj);
         }
 
         const init = () => {
@@ -151,15 +145,15 @@
 
     <section>
         <h2>Just need one</h2>
-        <p><button id="nbtnNPC">Give me an NPC</button></p>
+        <p><button class="button" id="nbtnNPC">Give me an NPC</button></p>
         <div id="npcContainer">
         </div>
     </section>
 
     <section>
         <h2>How about 10 NPCs?</h2>
-        <p><button id="nbtnNPCs">Show me 10!</button></p>
-        <div id="npcsContainer">
+        <p><button class="button" id="nbtnNPCs">Show me 10!</button></p>
+        <div id="npcsContainer"></div>
     </section>
 
     <section>
@@ -194,9 +188,9 @@
         <label for="speed">Speed: </label>
         <input id="speed" type="text" />
         <br>
-        <button id="btnSend">submit</button>
+        <button class="button" id="btnSend">submit</button>
     </section>
-    <a href="/npc-list">List</a>
+    <a href="/npc-list"><button class="button">See the list</button></a>
 </body>
 
 </html>

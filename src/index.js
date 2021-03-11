@@ -5,13 +5,16 @@ const query = require('querystring');
 
 const htmlHandler = require('./htmlResponses.js');
 const jsonHandler = require('./responses.js');
+const mediaHandler = require('./mediaResponses');
 
 const urlStruct = {
-  '/': htmlHandler.getnpcClientResponse,
+  '/': jsonHandler.getRandomNPCResponse,
   '/default-styles.css': jsonHandler.getCSSResponse,
   '/user-npc-list': jsonHandler.getUserNPCList,
   '/npc-client': htmlHandler.getnpcClientResponse,
   '/npc-list': htmlHandler.getNPCListResponse,
+  '/client-style': mediaHandler.getClientStyleResponse,
+  '/list-style': mediaHandler.getlistStyleResponse,
   notFound: htmlHandler.getNPCListResponse,
 };
 

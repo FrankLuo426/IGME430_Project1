@@ -1,6 +1,6 @@
-const fs = require('fs');
+// const fs = require('fs');
 
-const defaultStyles = fs.readFileSync(`${__dirname}/../client/default-styles.css`);
+// const defaultStyles = fs.readFileSync(`${__dirname}/../client/default-styles.css`);
 
 const npcName = ['Jacob', 'Ryan', 'Jae', 'Sean', 'Brad', 'Cullen', 'Oliver', 'Jonathan', 'Jared', 'Tom', 'Kippy', 'David', 'John', 'Frank'];
 const npcSex = ['male', 'female'];
@@ -88,13 +88,13 @@ const getRandomNPCXML = (limit = 1) => {
   return xmlList;
 };
 
-const getCSSResponse = (request, response) => {
-  response.writeHead(200, {
-    'Content-Type': 'text/css',
-  });
-  response.write(defaultStyles);
-  response.end();
-};
+// const getCSSResponse = (request, response) => {
+//   response.writeHead(200, {
+//     'Content-Type': 'text/css',
+//   });
+//   response.write(defaultStyles);
+//   response.end();
+// };
 
 // Source: https://stackoverflow.com/questions/2219526/how-many-bytes-in-a-javascript-string/29955838
 // Refactored to an arrow function by ACJ
@@ -138,7 +138,7 @@ const customNPC = (request, response, body) => {
     message: 'name and age are both required',
   };
 
-  userNPCList.NPC[userNPCList.counter.number] = {};
+  userNPCList.NPC[userNPCList.counter.number] = { num: Math.random() };
   userNPCList.NPC[userNPCList.counter.number].name = body.name;
   userNPCList.NPC[userNPCList.counter.number].sex = body.sex;
   userNPCList.NPC[userNPCList.counter.number].career = body.career;
@@ -171,6 +171,6 @@ const getUserNPCList = (request, response, params) => {
 };
 
 module.exports.getRandomNPCResponse = getRandomNPCResponse;
-module.exports.getCSSResponse = getCSSResponse;
+// module.exports.getCSSResponse = getCSSResponse;
 module.exports.customNPC = customNPC;
 module.exports.getUserNPCList = getUserNPCList;

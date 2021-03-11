@@ -1,0 +1,56 @@
+header {
+    background-color: black;
+    color: yellow;
+    font-size: 2em;
+    padding: 1em;
+}
+
+h1 {
+    font-family: fantasy;
+    filter: drop-shadow(5px 5px 2px #4444dd);
+}
+
+section {
+    border-bottom: 1px dashed gray;
+}
+
+#npcContainer {
+    display: flex;
+    background-color: DodgerBlue;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#npcsContainer {
+    display: flex;
+    background-color: DodgerBlue;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.npcDiv {
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 20px;
+}
+
+.button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
