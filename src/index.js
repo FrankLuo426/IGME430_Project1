@@ -15,7 +15,7 @@ const urlStruct = {
   '/npc-list': htmlHandler.getNPCListResponse,
   '/client-style': mediaHandler.getClientStyleResponse,
   '/list-style': mediaHandler.getlistStyleResponse,
-  notFound: htmlHandler.getNPCListResponse,
+  notFound: htmlHandler.get404Response,
 };
 
 // 3 - locally this will be 3000, on Heroku it will be assigned

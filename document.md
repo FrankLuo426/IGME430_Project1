@@ -12,3 +12,8 @@
 4. If you were to continue, what would you do to improve your app?
    1. I will allow user add property of the NPC.
 5. How did you go above and beyond?
+   1. https://fl1227-igme430-project1.herokuapp.com/npc-client
+   2. https://fl1227-igme430-project1.herokuapp.com/npc-list
+   3. https://fl1227-igme430-project1.herokuapp.com/
+   4. https://fl1227-igme430-project1.herokuapp.com/?limit=10
+   5. https://fl1227-igme430-project1.herokuapp.com/user-npc-list
