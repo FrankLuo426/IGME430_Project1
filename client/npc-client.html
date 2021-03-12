@@ -7,12 +7,12 @@
     <script>
         let sendingNPC = {};
 
-
         const handleResponse = (e) => {
-            console.log("e.target =", e.target); //here. e.target is the xhr object
-            console.log("e.target.response = ", e.target.response); //so that means this is a string of joke JSON
+            //console.log("e.target =", e.target); //here. e.target is the xhr object
+            //console.log("e.target.response = ", e.target.response); //so that means this is a string of joke JSON
             const obj = JSON.parse(e.target.response); //turn it back into an object
-            console.log("obj=", obj);
+            //console.log("obj=", obj);
+            const a = 1;
 
             if (obj.length == null) {
                 //now go ahead and update #npcContainer with the contents of the joke
@@ -29,14 +29,13 @@
                 <br><br>Strength: ${obj.Strength}
                 <br><br>Spellpower${obj.Spellpower}
                 <br><br>Speed: ${obj.Speed}
-                <br><br><button class="button" id="add"}>Add to list</button>
                 </div>`;
             } else {
                 let npcsContainer = document.querySelector("#npcsContainer");
                 npcsContainer.innerHTML = "";
                 for (let i = 0; i < obj.length; i++) {
                     npcsContainer.innerHTML += `
-                    <div class="npcDiv">
+                    <div class="npcDiv">          
                     <b>${obj[i].Name}</b>
                     <br><br>Sex: ${obj[i].Sex}
                 <br><br>Career: ${obj[i].Career}
@@ -47,7 +46,6 @@
                 <br><br>Strength: ${obj[i].Strength}
                 <br><br>Spellpower${obj[i].Spellpower}
                 <br><br>Speed: ${obj[i].Speed}
-                <br><br><button class="button">Add to list</button>
                 </div>`;
                 }
             }
@@ -56,7 +54,7 @@
         const downloadNPC = (e) => {
             // remember that an `Event` object gets passed along every time that an event handler or listener calls a function
             // the `target` property of that event points at the element that sent the event, in this case a button
-            console.log(`An element of id=${e.target.id} was clicked!`);
+            //console.log(`An element of id=${e.target.id} was clicked!`);
 
             let npcURL = "/";
             if (e.target.id == "nbtnNPC") {
@@ -100,6 +98,8 @@
             xhr.send(data);
         }
 
+
+
         const uploadSelectedNPC = (e) => {
             console.log("uploadSelectedNPC");
             let customNPCURL = "/custom-npc";
@@ -115,8 +115,8 @@
             xhr.send(data);
         }
 
-        function parseInData(obj) {
-            console.log(obj);
+        const myFunction = () => {
+            console.log("onclick");
         }
 
         const init = () => {
@@ -158,7 +158,69 @@
 
     <section>
         <h2>Add your custom NPC</h2>
-        <label for="name">Name: </label>
+
+        <div class="form">
+            <input type="text" id="name" class="finderSearchBox" autocomplete="off" required>
+            <label for="name" class="label-food">
+                <span class="content-food">Name</span>
+            </label>
+        </div>
+        <div class="form">
+            <input type="text" id="sex" class="finderSearchBox" autocomplete="off" required>
+            <label for="name" class="label-food">
+                <span class="content-food">Sex</span>
+            </label>
+        </div>
+        <div class="form">
+            <input type="text" id="career" class="finderSearchBox" autocomplete="off" required>
+            <label for="name" class="label-food">
+                <span class="content-food">Career</span>
+            </label>
+        </div>
+        <div class="form">
+            <input type="text" id="race" class="finderSearchBox" autocomplete="off" required>
+            <label for="name" class="label-food">
+                <span class="content-food">Race</span>
+            </label>
+        </div>
+        <div class="form">
+            <input type="text" id="personality" class="finderSearchBox" autocomplete="off" required>
+            <label for="name" class="label-food">
+                <span class="content-food">Personality</span>
+            </label>
+        </div>
+        <div class="form">
+            <input type="number" id="blood" class="finderSearchBox" autocomplete="off" required>
+            <label for="name" class="label-food">
+                <span class="content-food">Blood</span>
+            </label>
+        </div>
+        <div class="form">
+            <input type="number" id="mana" class="finderSearchBox" autocomplete="off" required>
+            <label for="name" class="label-food">
+                <span class="content-food">Mana</span>
+            </label>
+        </div>
+        <div class="form">
+            <input type="number" id="strength" class="finderSearchBox" autocomplete="off" required>
+            <label for="name" class="label-food">
+                <span class="content-food">Strength</span>
+            </label>
+        </div>
+        <div class="form">
+            <input type="number" id="spellpower" class="finderSearchBox" autocomplete="off" required>
+            <label for="name" class="label-food">
+                <span class="content-food">Spellpower</span>
+            </label>
+        </div>
+        <div class="form">
+            <input type="number" id="speed" class="finderSearchBox" autocomplete="off" required>
+            <label for="name" class="label-food">
+                <span class="content-food">Speed</span>
+            </label>
+        </div>
+
+        <!-- <label for="name">Name: </label>
         <input id="name" type="text" />
         <br>
         <label for="sex">Sex: </label>
@@ -180,14 +242,14 @@
         <input id="mana" type="number" />
         <br>
         <label for="strength">Strength: </label>
-        <input id="strength" type="text" />
+        <input id="strength" type="number" />
         <br>
         <label for="spellpower">Spellpower: </label>
-        <input id="spellpower" type="text" />
+        <input id="spellpower" type="number" />
         <br>
         <label for="speed">Speed: </label>
-        <input id="speed" type="text" />
-        <br>
+        <input id="speed" type="number" />
+        <br> -->
         <button class="button" id="btnSend">submit</button>
     </section>
     <a href="/npc-list"><button class="button">See the list</button></a>
